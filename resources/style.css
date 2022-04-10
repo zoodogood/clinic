@@ -12,6 +12,7 @@
 
   cursor: url("cursor.svg") 8 8, auto;
   user-select: none;
+  touch-action: none;
 }
 
 #global--bodyLayer-container

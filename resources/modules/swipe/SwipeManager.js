@@ -33,6 +33,7 @@ class SwipeManager extends EventEmitter {
   }
 
   pointerMoveHandler(preveousPosition, pointerEvent, target){
+    console.log(pointerEvent.x);
     const distance = ((pointerEvent.x - preveousPosition.x) ** 2 + (pointerEvent.y - preveousPosition.y) ** 2) ** 0.5;
     const angle = Math.atan2((pointerEvent.x - preveousPosition.x), -(pointerEvent.y - preveousPosition.y)) - Math.PI / 2;
     this.emit("force", {distance, angle, target})
