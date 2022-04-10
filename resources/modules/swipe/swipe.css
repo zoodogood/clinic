@@ -1,0 +1,32 @@
+/* For SVG self DOM */
+
+@keyframes swipe--swipe-helper-element--move-animation
+{
+  50%
+  {
+    transform: translateX(-10%);
+  }
+  100%
+  {
+    transform: translateX(10%);
+  }
+}
+
+.swipe--swipe-svg
+{
+  animation: swipe--swipe-helper-element--move-animation 1.4s infinite alternate;
+  opacity: 0.3;
+}
+
+
+/* For DOM node */
+.swipe--swipe-svg-object
+{
+  pointer-events: none;
+}
+
+.swipe--swipe-svg-object.remove
+{
+  transition: opacity 300ms;
+  opacity: 0;
+}

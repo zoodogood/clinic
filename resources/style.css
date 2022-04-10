@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Pangolin&family=Rubik+Glitch&display=swap');
+
+*
+{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Pangolin', cursive;
+  text-align: center;
+  white-space: pre-line;
+
+  cursor: url("cursor.svg") 8 8, auto;
+  user-select: none;
+}
+
+#global--bodyLayer-container
+{
+  box-shadow: 0px 0px 8px 5px rgba(34, 60, 80, 0.2) inset;
+
+  background: linear-gradient( #bbb, transparent 1px), linear-gradient( 90deg, #bbb, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+
+  position: fixed;
+  transform: translate(calc(-50% + 50vw), calc(-50% + 50vh));
+
+  contain: layout paint;
+}
+
+#global--bodyLayer
+{
+  min-width:  var( --width-limit,  100vw );
+  min-height: var( --height-limit, 100vh );
+  position: relative;
+}
+
+
+.testing
+{
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: red;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

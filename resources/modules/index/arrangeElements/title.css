@@ -1,0 +1,22 @@
+.arrangeElement--page-title--section
+{
+  max-width: 90vw;
+  width: 500px;
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.arrangeElement--page-title--section p
+{
+  font-weight: bold;
+  font-size: 1.2em;
+  font-family: 'Amatic SC';
+}
+
+.arrangeElement--page-title--section .swipe--swipe-svg-object
+{
+  height: clamp(50px, 500px, 10vw);
+}

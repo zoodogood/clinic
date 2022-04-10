@@ -1,0 +1,45 @@
+.arrangeElement--page-top-section--section
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+
+  gap: 5px;
+}
+
+
+.page-top-section--teleport
+{
+  padding: 40px;
+  letter-spacing: 5px;
+  border: 2px solid black;
+  transition: color 300ms, background-color 300ms, text-decoration-color 300ms;
+  text-decoration-color: black;
+}
+
+.page-top-section--teleport:hover
+{
+  color: white;
+  background: black;
+  text-decoration: underline white;
+}
+
+.page-top-section--github-link
+{
+  font-family: 'Rubik Glitch';
+  font-size: 0.8em;
+  color: black;
+
+  align-self: center;
+}
+
+.page-top-section--control-warning
+{
+  font-family: 'Rubik Glitch';
+}
