@@ -8,7 +8,7 @@ class PageTopSection {
 
   static innerHTML = `
     <div onclick = "alert('Представьте, что Вы телепортируетесь отсюда, из этого *ужасного* места')" class = "page-top-section--teleport">Телепорт</div>
-    <a href = "#" class = "page-top-section--github-link">GitHub™</a>
+    <a href = "https://github.com/zoodogood/clinic" class = "page-top-section--github-link">GitHub™</a>
     <span class = "page-top-section--control-warning">Осторожно, на сайте ужасное управление</span>
   `;
 }
