@@ -33,10 +33,9 @@ class SwipeManager extends EventEmitter {
   }
 
   pointerMoveHandler(preveousPosition, pointerEvent, target){
-    console.log(pointerEvent.x);
-    const distance = ((pointerEvent.x - preveousPosition.x) ** 2 + (pointerEvent.y - preveousPosition.y) ** 2) ** 0.5;
-    const angle = Math.atan2((pointerEvent.x - preveousPosition.x), -(pointerEvent.y - preveousPosition.y)) - Math.PI / 2;
-    this.emit("force", {distance, angle, target})
+    const distance = this.constructor.getDistance(pointerEvent, preveousPosition);
+    const angle = this.constructor.getAngle(pointerEvent, preveousPosition);
+    this.emit("swipe", {distance, angle, target});
   }
 
   static #handlersList = {
@@ -50,25 +49,79 @@ class SwipeManager extends EventEmitter {
       removeHandler: (target, callback) => target.forEach(node => node.removeEventListener("pointerdown", callback)),
       callback: async function(pointerEvent){
         const target = pointerEvent.path.find(node => this.nodes.includes(node));
-        const startsPosition = {x: pointerEvent.x, y: pointerEvent.y};
-        let preveousPosition = {...startsPosition};
+        const startsPosition = {x: pointerEvent.x, y: pointerEvent.y, pointerEvent};
+        let lastPosition = {...startsPosition};
+        let preveousPosition;
 
         this.emit("starts", {startsPosition, target});
 
         const onMove = (pointerEvent) => {
+          const currentPosition = {
+            x: pointerEvent.x,
+            y: pointerEvent.y,
+            pointerEvent
+          }
+
+          preveousPosition = lastPosition;
           this.pointerMoveHandler.call(this, preveousPosition, pointerEvent, target);
-          preveousPosition.x = pointerEvent.x;
-          preveousPosition.y = pointerEvent.y;
-          this.emit("move", {position: preveousPosition, target});
+          this.emit("move", {position: preveousPosition, target, pointerEvent});
+
+          preveousPosition = lastPosition;
+          lastPosition = currentPosition;
         }
         const whenPointerUp = new Promise(resolve => document.addEventListener("pointerup", resolve, {once: true}));
         target.addEventListener("pointermove", onMove);
 
-        await whenPointerUp;
+        const pointerUpEvent = await whenPointerUp;
         target.removeEventListener("pointermove", onMove);
-        this.emit("end", {preveousPosition, target});
+        this.emit("end", {preveousPosition, pointerUpEvent, target});
+      }
+    },
+    "selfend": {
+      description: "registers a layer toss",
+      target: function(){
+        return this;
+      },
+      setHandler:    (target, callback) => target.on("end", callback),
+      removeHandler: (target, callback) => target.removeListener("end", callback),
+      callback: async function({preveousPosition, pointerUpEvent, target}){
+        const timeSlice = performance.now() - preveousPosition.pointerEvent.timeStamp;
+        if (timeSlice > 100)
+          return;
+
+        let tossBreak = false;
+        this.once("starts", () => tossBreak = true);
+
+        const distance = this.constructor.getDistance(pointerUpEvent, preveousPosition);
+        const angle = this.constructor.getAngle(pointerUpEvent, preveousPosition);
+        let force = distance;
+
+
+        while (force > 1){
+          if (tossBreak === true)
+            break;
+
+          const SPEED_MULTIPLAYER = 0.05;
+          const FORCE_MULTIPLAYER = 5;
+
+          const speed = force / (1 / SPEED_MULTIPLAYER);
+          force -= speed;
+          const currentForce = speed * FORCE_MULTIPLAYER;
+
+          await new Promise(resolve => setTimeout(resolve, 10));
+          this.emit("swipe", {distance: currentForce, angle, target});
+        }
+
       }
     }
 
   };
+
+  static getDistance(vector, vector2){
+    return ((vector.x - vector2.x) ** 2 + (vector.y - vector2.y) ** 2) ** 0.5;
+  }
+
+  static getAngle(vector, vector2){
+    return Math.atan2((vector.x - vector2.x), -(vector.y - vector2.y)) - Math.PI / 2;
+  }
 }

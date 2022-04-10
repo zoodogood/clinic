@@ -11,7 +11,7 @@ await new FileLoader("resources/modules/")
   .whenQueueEnd;
 
 const swipeManager = new SwipeManager({targetSelector: "#global--bodyLayer-container"});
-swipeManager.on("force", ({ angle, distance, target }) => {
+swipeManager.on("swipe", ({ angle, distance, target }) => {
   const x = Math.cos(angle) * distance;
   const y = Math.sin(angle) * distance;
 
@@ -27,17 +27,17 @@ swipeManager.on("force", ({ angle, distance, target }) => {
 swipeManager.on("end", ({ target }) => {
   const {width, height} = target.getBoundingClientRect();
 
-  if (parseInt(target.style.left) > width / 2.4)
-    target.style.left = `${ width / 2.4 }px`;
+  if (parseInt(target.style.left) > width / 2)
+    target.style.left = `${ width / 2 }px`;
 
-  if (parseInt(target.style.top) > height / 2.4)
-    target.style.top  = `${ height / 2.4 }px`;
+  if (parseInt(target.style.top) > height / 2)
+    target.style.top  = `${ height / 2 }px`;
 
-  if (parseInt(target.style.left) < -width / 2.4)
-    target.style.left = `${ -width / 2.4 }px`;
+  if (parseInt(target.style.left) < -width / 2)
+    target.style.left = `${ -width / 2 }px`;
 
-  if (parseInt(target.style.top) < -height / 2.4)
-    target.style.top = `${ -height / 2.4 }px`;
+  if (parseInt(target.style.top) < -height / 2)
+    target.style.top = `${ -height / 2 }px`;
 });
 
 
