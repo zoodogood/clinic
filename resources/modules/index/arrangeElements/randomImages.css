@@ -2,12 +2,13 @@
 {
   position: fixed;
   background-image: var( --background-image );
-  width: 500px;
-  height: 300px;
+  width: 200px;
+  height: 100px;
 
   background-size: contain;
   background-repeat: no-repeat;
 
   filter: drop-shadow(2px 4px 6px black) sepia(0.5);
+  opacity: 0.4;
   z-index: -1;
 }

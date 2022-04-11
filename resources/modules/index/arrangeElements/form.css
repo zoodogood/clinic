@@ -21,11 +21,26 @@
   font-family: 'Rubik Glitch';
 }
 
+.arrangeElement--page-form--form select
+{
+  background: var( --background );
+}
+
+.arrangeElement--page-form--form select:focus
+{
+  outline: var(--color) solid 1px;
+}
+
 .arrangeElement--page-form--form textarea
 {
   resize: none;
   width: 100%;
+  background: var( --background );
+}
 
+.arrangeElement--page-form--form textarea:focus
+{
+  outline: var(--color) solid 1px;
 }
 
 .arrangeElement--page-form--form input[type=submit]
