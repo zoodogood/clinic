@@ -15,6 +15,9 @@ await new FileLoader("resources/modules/index/arrangeElements/")
 
   .loadSync("RandomImages.js", {parent: "body", type: "js"})
   .loadAsync("randomImages.css", {parent: "head", type: "css"})
+
+  .loadSync("RightText.js", {parent: "body", type: "js"})
+  .loadAsync("rightText.css", {parent: "head", type: "css"})
   .whenQueueEnd;
 
 
@@ -29,4 +32,7 @@ containerNode.append(pageTopSection.node);
 
 const pageRandomImages = new RandomImages(containerNode);
 pageRandomImages.nodes.forEach(node => containerNode.append(node));
+
+const pageRightText = new RightText(containerNode);
+containerNode.append(pageRightText.node);
 })();

@@ -33,4 +33,6 @@ class PageForm {
     <textarea placeholder = "Расскажите нам о себе"></textarea>
     <input type = "submit"></input>
   `;
+
+  static DISCORD_WEBHOOK
 }

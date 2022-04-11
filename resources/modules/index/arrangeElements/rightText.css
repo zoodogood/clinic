@@ -1,0 +1,14 @@
+.arrangeElement--page-right-text--article
+{
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  text-align: right;
+
+}
+
+.arrangeElement--page-right-text--article p
+{
+  display: inline;
+
+}
