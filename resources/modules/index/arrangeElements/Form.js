@@ -34,5 +34,4 @@ class PageForm {
     <input type = "submit"></input>
   `;
 
-  static DISCORD_WEBHOOK
 }
